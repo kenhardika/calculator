@@ -29,72 +29,118 @@ function operatorButton(operator) {
     console.log(operator);
     switch (operator) {
         case "AC":
-        displayNum.textContent = defaultMode;
-        firstNum = "";
-        secondNum = "";
+            displayNum.textContent = defaultMode;
+            firstNum = "";
+            secondNum = "";
+            operatorSign = "";
         break;
+
         case "+":
             if (firstNum === "") {
-            firstNum = displayNum.textContent;
-            operatorSign = operator;
-            //console.log();
+                firstNum = parseFloat(displayNum.textContent);
+                operatorSign = "+";
             }
-                else {
-                    secondNum = displayNum.textContent; 
+            else {
+                equalSign();
+                operatorSign ="+";
+                console.log('hit second +');
                 };
         break;
-        case "=":
-            secondNum = displayNum.textContent; 
-            if (firstNum !== "" && secondNum !== "" && operator !== ""){
-                operate(firstNum,secondNum,operatorSign);
-                secondNum = firstNum;
-                secondNum = "";
-                operatorSign = "";
-            }    
+
+        case "-":
+            if (firstNum === "") {
+                firstNum = parseFloat(displayNum.textContent);
+                operatorSign = "-";
+            }
             else {
-                console.log('ERROR First, Second, and operator "" ');
-            } 
+                equalSign();
+                operatorSign ="-";
+                console.log('hit second -');
+                };
+        break;
+        
+        case "x":
+            if (firstNum === "") {
+                firstNum = parseFloat(displayNum.textContent);
+                operatorSign = "x";
+            }
+            else {
+                equalSign();
+                operatorSign ="x";
+                console.log('hit second x');
+                };
+        break;
+
+        case "÷":
+            if (firstNum === "") {
+                firstNum = parseFloat(displayNum.textContent);
+                operatorSign = "÷";
+            }
+            else {
+                equalSign();
+                operatorSign ="÷";
+                console.log('hit second ÷');
+                };
+        break;
+
+        case "=":
+            equalSign();
+            firstNum = "";
+        break; 
     }
-
-
 };
+
+
+
 function numberButton(number) {
     console.log(number);
-    if (displayNum.textContent === "0") {
-        displayNum.textContent = "";  
-        displayNum.textContent += number;
-    }
-    else if( firstNum!=="" ){
+    if (parseFloat(displayNum.textContent) === 0) {
         displayNum.textContent = "";
-        displayNum.textContent += number;
     }
+    else if(parseFloat(firstNum) === parseFloat(displayNum.textContent) ){
+        displayNum.textContent = "";
+    }
+    displayNum.textContent += number;   
 };
 
-
-
-
-function operate(num1,num2,operator){
-console.log(num1 + num2 + operator);
-let result;
-switch (operator) {
-    case '+':
-        result = num1 + num2;
-        break;
-    case '-':
-        result = num1 - num2;
-        break;
-    case 'x':
-        result = num1 * num2;
-        break;
-    case '÷':
-        result = num1 / num2;
-        break;
-    default:
-        console.log(`Sorry that's not an operator`)
+//normal equal and equal with operator is DIFFERERNT!
+function equalSign(){
+    secondNum = parseFloat(displayNum.textContent); 
+        if (secondNum === 0) {
+            console.log('YOU CANT DIVIDE BY ZERO');
+        }
+        else if (firstNum !== "" && secondNum !== "" && operatorSign !==""){
+            operate(firstNum,secondNum,operatorSign);
+            secondNum = firstNum;
+            secondNum = "";
+        }    
+        else {
+            console.log('ERROR First, Second, and operator "" ');
+        }
 }
-firstNum = result;
-displayNum.textContent = result;
-return result;
+function operate(num1,num2,operator){
+   //console.log(num1 + num2 + operator);
+    let result;
+    switch (operator) {
+        case '+':
+            result = num1 + num2;
+            break;
+        case '-':
+            result = num1 - num2;
+            break;
+        case 'x':
+            result = num1 * num2;
+            break;
+        case '÷':
+            result = num1 / num2;
+            break;
+        default:
+            console.log(`Sorry that's not an operator`)
+    }
+    result = parseFloat(result.toFixed(3));
+    firstNum = result; 
+    displayNum.textContent = firstNum;
+    return result;
 }
 
 
