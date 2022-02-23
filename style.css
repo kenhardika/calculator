@@ -1,0 +1,56 @@
+body{
+    margin: 0;
+}
+button {
+    height: 80px;
+    border-radius: 50%;
+    font-size: 22px;
+}
+
+.header {
+    border: 2px solid black;
+    height: 210px;
+}
+
+.content {
+    display: flex;
+    border: 2px solid blue;
+    height: 610px;
+    align-items: center;
+    justify-content: center;
+}
+    .bodyCal {
+        display: grid;
+        grid-template-columns: repeat(4,80px);
+        grid-template-rows: repeat(6,80px);
+        grid-gap: 10px;
+        padding-top: 20px;
+        /* align-items: center; */
+        justify-content: center ;
+        height: 550px;
+        width: 500px;
+        border: 2px solid gold;
+
+    }
+        .displayNum {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            font-size: 36px;
+
+            height: 80px;
+            border: 2px solid gray;
+            grid-column-start: 1;
+            grid-column-end: 5;
+        }
+        .zero{
+            border-radius: 20px;
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+
+
+.footer {
+    border: 2px solid yellow;
+    height: 110px;
+}
