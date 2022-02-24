@@ -10,7 +10,7 @@ let displayCount;
 
 function checkDisplayCount(){
     displayCount = displayNum.textContent.toString().length;
-    console.log( "display count = " +displayCount);
+    //console.log( "display count = " +displayCount);
     if (displayCount>16) {
         displayNum.textContent ="ERROR";
         numberBtn.forEach(button =>{
@@ -27,15 +27,10 @@ function checkDisplayCount(){
 };
 
 function operatorButton(operator) {
-    console.log(operator);
+    //console.log(operator);
     switch (operator) {
         case "AC":
-            displayNum.textContent = 0;
-            firstNum = "";
-            secondNum = "";
-            operatorSign = "";
-            checkDisplayCount();
-            checkDisplayForBackspace(); 
+            resetDisplay();
         break;
 
         case "+":
@@ -46,7 +41,7 @@ function operatorButton(operator) {
             else {
                 equalSign();
                 operatorSign ="+";
-                console.log('hit second +');
+      //          console.log('hit second +');
                 };
         break;
 
@@ -58,7 +53,7 @@ function operatorButton(operator) {
             else {
                 equalSign();
                 operatorSign ="-";
-                console.log('hit second -');
+        //        console.log('hit second -');
                 };
         break;
         
@@ -70,7 +65,7 @@ function operatorButton(operator) {
             else {
                 equalSign();
                 operatorSign ="x";
-                console.log('hit second x');
+          //      console.log('hit second x');
                 };
         break;
 
@@ -82,7 +77,7 @@ function operatorButton(operator) {
             else {
                 equalSign();
                 operatorSign ="÷";
-                console.log('hit second ÷');
+            //    console.log('hit second ÷');
                 };
         break;
 
@@ -95,12 +90,7 @@ function operatorButton(operator) {
         break;
 
         case "C":
-            displayNum.textContent = 0;
-            firstNum = "";
-            secondNum = "";
-            operatorSign = "";
-            checkDisplayCount();
-            checkDisplayForBackspace(); 
+            resetDisplay();
         break;
         case ".":
             commaSign(operator);
@@ -113,8 +103,18 @@ function operatorButton(operator) {
         break;
     }
 };
+
+function resetDisplay(){
+    displayNum.textContent = 0;
+    firstNum = "";
+    secondNum = "";
+    operatorSign = "";
+    checkDisplayCount();
+    checkDisplayForBackspace(); 
+}
+
 function numberButton(number) {
-    console.log(number);
+   // console.log(number);
     if (parseFloat(displayNum.textContent) === 0 && displayCount === 1) {
         displayNum.textContent = "";
     }
@@ -141,7 +141,7 @@ function equalSign(){
         if (secondNum === 0) {
             displayNum.style.fontSize="24px";
             displayNum.textContent = "ERROR";
-            console.log('YOU CANT DIVIDE BY ZERO');
+     //       console.log('YOU CANT DIVIDE BY ZERO');
         }
         else if (firstNum !== "" && secondNum !== "" && operatorSign !==""){
             operate(firstNum,secondNum,operatorSign);
@@ -149,7 +149,7 @@ function equalSign(){
             secondNum = "";
         }    
         else {
-            console.log('ERROR First, Second, and operator "" ');
+      //      console.log('ERROR First, Second, and operator "" ');
         }
 }
 function operate(num1,num2,operator){
@@ -168,10 +168,11 @@ function operate(num1,num2,operator){
             result = num1 / num2;
             break;
         default:
-            console.log(`Sorry that's not an operator`)
+        //    console.log(`Sorry that's not an operator`)
+            break;
     }
     result = parseFloat(result.toFixed(4));
-    console.log(result);
+    //console.log(result);
     displayNum.textContent = result;
     checkDisplayCount();
     checkDisplayForBackspace();
@@ -194,18 +195,18 @@ function backspace() {
 function checkDisplayForBackspace(){
     let clear = document.getElementById('clear');
     if (displayCount > 1) {
-        console.log('this is should be c')
+        //console.log('this is should be c')
         clear.innerText = "C";   
     }
     else if(displayCount == 1){
-        console.log('hit should change AC')
+       // console.log('hit should change AC')
         clear.innerText = "AC";  
     }
 };
 
 function keyPress(e){
     if(displayCount>16){ 
-        console.log("hit keypress error");
+      //  console.log("hit keypress error");
         return
     }
     else if (e.keyCode == 8 ) {
