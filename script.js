@@ -8,14 +8,22 @@ let secondNum = "";
 let operatorSign = "";
 displayNum.textContent = defaultMode;
 
-
-operatorBtn.forEach(button =>{
-    button.onclick=()=> {operatorButton(button.innerText)}
- });
-numberBtn.forEach(button =>{
-    button.onclick=()=> {numberButton(button.innerText)}
- });
-
+function checkDisplayCount(){
+    displayCount = displayNum.textContent.toString().length;
+    if (displayCount>19) {
+        displayNum.textContent ="ERROR";
+        numberBtn.forEach(button =>{
+            button.onclick=()=> {displayNum.textContent ="ERROR";}
+         });}
+    else {
+        operatorBtn.forEach(button =>{
+            button.onclick=()=> {operatorButton(button.innerText)}
+         });
+        numberBtn.forEach(button =>{
+            button.onclick=()=> {numberButton(button.innerText)}
+         });
+    }
+};
 
 function operatorButton(operator) {
     console.log(operator);
@@ -25,6 +33,7 @@ function operatorButton(operator) {
             firstNum = "";
             secondNum = "";
             operatorSign = "";
+            checkDisplayCount();
         break;
 
         case "+":
@@ -77,24 +86,10 @@ function operatorButton(operator) {
 
         case "-/+":
             displayNum.textContent = displayNum.textContent*-1;
-            // if (firstNum === "") {
-            //     firstNum = parseFloat(displayNum.textContent);
-            //     operatorSign = "-/+";
-            //     equalSign();
-            //     firstNum="";
-            // }
-            // else if (firstNum!=="" && secondNum === "") {
-            //     operatorSign = "-/+";
-            //     equalSign();
-            //     console.log('hit second num neg');
-            // }
-            // else {
-            //     //equalSign();
-            //     operatorSign ="-/+";
-            //     equalSign();
-            //     firstNum="";
-            //     console.log('hit second -/+');
-            //     };
+        break;
+
+        case "%":
+            displayNum.textContent = displayNum.textContent/100;
         break;
 
         case "=":
@@ -103,7 +98,7 @@ function operatorButton(operator) {
         break; 
     }
 };
-
+let displayCount;
 function numberButton(number) {
     console.log(number);
     if (parseFloat(displayNum.textContent) === 0) {
@@ -112,18 +107,20 @@ function numberButton(number) {
     else if(parseFloat(firstNum) === parseFloat(displayNum.textContent) ){
         displayNum.textContent = "";
     }
-    displayNum.textContent += number;   
+    displayNum.textContent += number;
+    checkDisplayCount() 
 };
 
 function equalSign(){
     secondNum = parseFloat(displayNum.textContent); 
         if (secondNum === 0) {
+            displayNum.style.fontSize="24px";
+            displayNum.textContent = "CAN'T DIVIDE BY ZERO";
             console.log('YOU CANT DIVIDE BY ZERO');
         }
         else if (firstNum !== "" && secondNum !== "" && operatorSign !==""){
             operate(firstNum,secondNum,operatorSign);
             firstNum = displayNum.textContent; 
-            // secondNum = firstNum;
             secondNum = "";
         }    
         else {
@@ -131,7 +128,6 @@ function equalSign(){
         }
 }
 function operate(num1,num2,operator){
-   //console.log(num1 + num2 + operator);
     let result;
     switch (operator) {
         case '+':
@@ -146,20 +142,15 @@ function operate(num1,num2,operator){
         case '÷':
             result = num1 / num2;
             break;
-        // case '-/+':
-        //     result = (displayNum.textContent) * -1
-        //     break;
         default:
             console.log(`Sorry that's not an operator`)
     }
     result = parseFloat(result.toFixed(3));
     console.log(result);
     displayNum.textContent = result;
-    
+    checkDisplayCount()
     return result;
 }
-
-
-// window.onload = () => { 
-//     
-// }
+ window.onload = () => { 
+ checkDisplayCount();    
+ }
