@@ -75,6 +75,28 @@ function operatorButton(operator) {
                 };
         break;
 
+        case "-/+":
+            displayNum.textContent = displayNum.textContent*-1;
+            // if (firstNum === "") {
+            //     firstNum = parseFloat(displayNum.textContent);
+            //     operatorSign = "-/+";
+            //     equalSign();
+            //     firstNum="";
+            // }
+            // else if (firstNum!=="" && secondNum === "") {
+            //     operatorSign = "-/+";
+            //     equalSign();
+            //     console.log('hit second num neg');
+            // }
+            // else {
+            //     //equalSign();
+            //     operatorSign ="-/+";
+            //     equalSign();
+            //     firstNum="";
+            //     console.log('hit second -/+');
+            //     };
+        break;
+
         case "=":
             equalSign();
             firstNum = "";
@@ -100,7 +122,8 @@ function equalSign(){
         }
         else if (firstNum !== "" && secondNum !== "" && operatorSign !==""){
             operate(firstNum,secondNum,operatorSign);
-            secondNum = firstNum;
+            firstNum = displayNum.textContent; 
+            // secondNum = firstNum;
             secondNum = "";
         }    
         else {
@@ -123,12 +146,16 @@ function operate(num1,num2,operator){
         case '÷':
             result = num1 / num2;
             break;
+        // case '-/+':
+        //     result = (displayNum.textContent) * -1
+        //     break;
         default:
             console.log(`Sorry that's not an operator`)
     }
     result = parseFloat(result.toFixed(3));
-    firstNum = result; 
-    displayNum.textContent = firstNum;
+    console.log(result);
+    displayNum.textContent = result;
+    
     return result;
 }
 
