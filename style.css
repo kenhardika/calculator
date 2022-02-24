@@ -34,17 +34,17 @@ button:active{
         justify-content: center ;
         height: 550px;
         width: 400px;
-        border: 2px solid gold;
+        /* border: 2px solid gold; */
         background-color: black;
-        border-radius: 20px;
+        border-radius: 30px;
 
     }   
         [data-number]{
-            background-color: gray;
+            background-color: #4d4d4d;
             color: white;
         }
         [data-number]:hover {
-            background-color: #b6b6b6;
+            background-color: #929292;
             color: white;
         }
         [data-operator]{
@@ -68,6 +68,29 @@ button:active{
             grid-column-start: 1;
             grid-column-end: 5;
         }
+        #clear{
+            background-color: #d8d8d8;
+            color: black;
+        }   
+            #clear:hover{
+                background-color: #ececec;
+                color: black;
+            }
+        #minpos{
+            color: black;
+            background-color: #d8d8d8;
+        }
+            #minpos:hover{
+                background-color: #ececec;
+            }
+        #percent{
+            color: black;
+            background-color: #d8d8d8;
+        }
+            #percent:hover{
+                background-color: #ececec;
+            }
+
         .zero{
             border-radius: 20px;
             grid-column-start: 1;

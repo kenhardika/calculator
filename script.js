@@ -115,7 +115,7 @@ function equalSign(){
     secondNum = parseFloat(displayNum.textContent); 
         if (secondNum === 0) {
             displayNum.style.fontSize="24px";
-            displayNum.textContent = "CAN'T DIVIDE BY ZERO";
+            displayNum.textContent = "ERROR";
             console.log('YOU CANT DIVIDE BY ZERO');
         }
         else if (firstNum !== "" && secondNum !== "" && operatorSign !==""){
