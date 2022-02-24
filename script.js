@@ -145,7 +145,7 @@ function operate(num1,num2,operator){
         default:
             console.log(`Sorry that's not an operator`)
     }
-    result = parseFloat(result.toFixed(3));
+    result = parseFloat(result.toFixed(4));
     console.log(result);
     displayNum.textContent = result;
     checkDisplayCount()

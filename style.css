@@ -2,9 +2,14 @@ body{
     margin: 0;
 }
 button {
+    font-family: 'Open Sans', sans-serif;
     height: 80px;
     border-radius: 50%;
     font-size: 22px;
+    border: none;
+}
+button:active{
+    transform: translateY(2px);
 }
 
 .header {
@@ -28,18 +33,38 @@ button {
         /* align-items: center; */
         justify-content: center ;
         height: 550px;
-        width: 500px;
+        width: 400px;
         border: 2px solid gold;
+        background-color: black;
+        border-radius: 20px;
 
-    }
+    }   
+        [data-number]{
+            background-color: gray;
+            color: white;
+        }
+        [data-number]:hover {
+            background-color: #b6b6b6;
+            color: white;
+        }
+        [data-operator]{
+            background-color: orange;
+            color: white;
+        }
+        [data-operator]:hover{
+            background-color: #ffc456;
+            color: white;
+        }
         .displayNum {
+            /* font-family: 'Open Sans', sans-serif; */
+            font-family: 'Roboto Mono', monospace;
             display: flex;
             justify-content: flex-end;
             align-items: center;
             font-size: 36px;
-
+            color: white;
             height: 80px;
-            border: 2px solid gray;
+            /* border: 2px solid gray; */
             grid-column-start: 1;
             grid-column-end: 5;
         }
