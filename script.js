@@ -102,7 +102,9 @@ function operatorButton(operator) {
             checkDisplayCount();
             checkDisplayForBackspace(); 
         break;
-
+        case ".":
+            commaSign(operator);
+        break;
         case "=":
             equalSign();
             firstNum = "";
@@ -113,7 +115,7 @@ function operatorButton(operator) {
 };
 function numberButton(number) {
     console.log(number);
-    if (parseFloat(displayNum.textContent) === 0) {
+    if (parseFloat(displayNum.textContent) === 0 && displayCount === 1) {
         displayNum.textContent = "";
     }
     else if(parseFloat(firstNum) === parseFloat(displayNum.textContent) ){
@@ -124,6 +126,16 @@ function numberButton(number) {
     checkDisplayForBackspace(); 
 };
 
+function commaSign(dot){
+        if( firstNum ==="" || secondNum ==="" ){
+            //displayNum.textContent = 0;
+            displayNum.textContent += dot;
+        }
+        else if( !displayNum.textContent.includes(dot) ){
+            displayNum.textContent += dot;
+        }
+        checkDisplayCount();
+}
 function equalSign(){
     secondNum = parseFloat(displayNum.textContent); 
         if (secondNum === 0) {
