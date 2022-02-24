@@ -1,16 +1,17 @@
 const numberBtn = document.querySelectorAll('[data-number]');
 const operatorBtn = document.querySelectorAll('[data-operator]');
 const displayNum = document.querySelector('.displayNum');
-
-let defaultMode = 0;
 let firstNum = "";
 let secondNum = "";
 let operatorSign = "";
-displayNum.textContent = defaultMode;
+displayNum.textContent = 0;
+let displayCount;
+
 
 function checkDisplayCount(){
     displayCount = displayNum.textContent.toString().length;
-    if (displayCount>19) {
+    console.log( "display count = " +displayCount);
+    if (displayCount>16) {
         displayNum.textContent ="ERROR";
         numberBtn.forEach(button =>{
             button.onclick=()=> {displayNum.textContent ="ERROR";}
@@ -29,11 +30,12 @@ function operatorButton(operator) {
     console.log(operator);
     switch (operator) {
         case "AC":
-            displayNum.textContent = defaultMode;
+            displayNum.textContent = 0;
             firstNum = "";
             secondNum = "";
             operatorSign = "";
             checkDisplayCount();
+            checkDisplayForBackspace(); 
         break;
 
         case "+":
@@ -92,13 +94,23 @@ function operatorButton(operator) {
             displayNum.textContent = displayNum.textContent/100;
         break;
 
+        case "C":
+            displayNum.textContent = 0;
+            firstNum = "";
+            secondNum = "";
+            operatorSign = "";
+            checkDisplayCount();
+            checkDisplayForBackspace(); 
+        break;
+
         case "=":
             equalSign();
             firstNum = "";
         break; 
+        default:
+        break;
     }
 };
-let displayCount;
 function numberButton(number) {
     console.log(number);
     if (parseFloat(displayNum.textContent) === 0) {
@@ -108,7 +120,8 @@ function numberButton(number) {
         displayNum.textContent = "";
     }
     displayNum.textContent += number;
-    checkDisplayCount() 
+    checkDisplayCount();
+    checkDisplayForBackspace(); 
 };
 
 function equalSign(){
@@ -148,9 +161,56 @@ function operate(num1,num2,operator){
     result = parseFloat(result.toFixed(4));
     console.log(result);
     displayNum.textContent = result;
-    checkDisplayCount()
+    checkDisplayCount();
+    checkDisplayForBackspace();
     return result;
 }
+
+function backspace() {
+    let display = Array.from(displayNum.textContent);
+        if (displayCount > 1) {
+            display.pop();
+            displayNum.textContent = display.join("");
+            checkDisplayCount();
+        }
+        else if (displayCount == 1 ) {
+            displayNum.textContent = 0;
+            checkDisplayForBackspace();
+        }
+};
+
+function checkDisplayForBackspace(){
+    let clear = document.getElementById('clear');
+    if (displayCount > 1) {
+        console.log('this is should be c')
+        clear.innerText = "C";   
+    }
+    else if(displayCount == 1){
+        console.log('hit should change AC')
+        clear.innerText = "AC";  
+    }
+};
+
+function keyPress(e){
+    if(displayCount>16){ 
+        console.log("hit keypress error");
+        return
+    }
+    else if (e.keyCode == 8 ) {
+        backspace();
+    }
+    else{
+        const key = document.querySelector(`[data-keys="${e.keyCode}"]`);
+        //const op = document.querySelector(`[data-op="${e.keyCode}"]`);
+        //console.log(key.textContent);
+        numberButton(key.textContent);
+        //operatorButton(op.textContent);
+    }
+};
+window.addEventListener('keydown', keyPress);
+
+
  window.onload = () => { 
- checkDisplayCount();    
+ checkDisplayCount(); 
+ checkDisplayForBackspace();   
  }
